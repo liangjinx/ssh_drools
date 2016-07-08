@@ -33,8 +33,8 @@
 #### server
 > zhinan.liang
 >> interceptorS
->>> test
->> [model](http://blog.csdn.net/guodongxiaren "自定义与drools规则文件交互的对象")
+>>> [Myinterceptor](http://blog.csdn.net/guodongxiaren "实现自定义执行方法的拦截器")
+>> test
 >> my
 >>> MyKnowledgeBase drools实现注解需要的
 >> utils
