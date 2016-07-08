@@ -30,4 +30,25 @@
 * [log4j2.xml](http://blog.csdn.net/guodongxiaren "日志配置文件，暂时不可以使用")
 * [oracle.sql](http://blog.csdn.net/guodongxiaren "数据库插入语句，添加数据")
 
+#### server
+> zhinan.liang
+>> interceptorS
+>>> [Myinterceptor](http://blog.csdn.net/guodongxiaren "实现自定义执行方法的拦截器")
+>> model 
+        自定义与drools规则文件交互的对象
+>> my
+>>> MyKnowledgeBase drools实现注解需要的
+>> utils
+>>> DateUtil   日期操作的实现类
+>> servers
+ publicService   service 层的公共方法集
+>>> impl
+PublicServiceImpl  drools 操作后的出口点数据
+> resources
+* [application-context.xml](http://blog.csdn.net/guodongxiaren "spring的主要配置文件,这里主要是导入drools的spring配置文件")
+* [drools_spring.xml](http://blog.csdn.net/guodongxiaren "drools 的spring配置文件，目前没有使用")
+* [kie_spring.xml](http://blog.csdn.net/guodongxiaren "kie方式配置drools 的spring配置文件")
+>> META-INFsss drools不和spring组合使用的时候测试使用
+>> rules,test,tt   都是规则文件
+
 
