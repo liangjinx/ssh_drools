@@ -33,12 +33,12 @@
 #### server
 > zhinan.liang
 >> interceptorS
->>> ff
->> test
->> my
->>> MyKnowledgeBase drools实现注解需要的
->> utils
->>> DateUtil   日期操作的实现类
+>>>   ff
+>>   test
+>>  my
+>>>   MyKnowledgeBase drools实现注解需要的
+>>   utils
+>>>    DateUtil   日期操作的实现类
 >> servers
  publicService   service 层的公共方法集
 >>> impl
