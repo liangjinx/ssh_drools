@@ -48,6 +48,6 @@ PublicServiceImpl  drools 操作后的出口点数据
 * [drools_spring.xml](http://blog.csdn.net/guodongxiaren "drools 的spring配置文件，目前没有使用")
 * [kie_spring.xml](http://blog.csdn.net/guodongxiaren "kie方式配置drools 的spring配置文件")
 >> META-INFsss drools不和spring组合使用的时候测试使用
->> rules,test,tt   都是规则文件
+>> rules,test,tt  都
 
 
