@@ -13,15 +13,14 @@
     是spring的mvc，使用struts做业务请求分发，返回数据到前端，目前有个问题是action和前端交互的时候，需要写的代码太多。
     
 #### entity
->zhinan.liang
->>daos
+> zhinan.liang
+>> daos
     [publicDao](http://blog.csdn.net/guodongxiaren "do的公共方法")
->>>impl
+>>> impl
 * [publicDaoImpl](http://blog.csdn.net/guodongxiaren "dao的公共方法的实现")
 * [MyHibernateDaoSupport](http://blog.csdn.net/guodongxiaren "dao公共方法实现所需要的，为了实现注解")
-
->>entitys
->resources
+>> entitys
+> resources
 >>[application-context.xml](http://blog.csdn.net/guodongxiaren "spring的主要配置文件，导入其他配置文件")
 >>[applicationContext-druid-db.xml](http://blog.csdn.net/guodongxiaren "数据库，事务处理的配置文件")
 >>[cp30.properties](http://blog.csdn.net/guodongxiaren "数据库配置信息")
