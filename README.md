@@ -64,6 +64,9 @@
 >> action
 * [FlowAction](http://blog.csdn.net/guodongxiaren "主要做测试的，与前端界面交互")
 * [PublicAction](http://blog.csdn.net/guodongxiaren "用于struts的传参，接收参数，")
+
+
+
 >> model
 * [GuizeModel](http://blog.csdn.net/guodongxiaren "测试的时候使用的，用于传递对象")
 
