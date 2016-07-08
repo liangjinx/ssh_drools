@@ -23,12 +23,11 @@
 >> entitys
 
 > resources
-
->>*[application-context.xml](http://blog.csdn.net/guodongxiaren "spring的主要配置文件，导入其他配置文件")
->>*[applicationContext-druid-db.xml](http://blog.csdn.net/guodongxiaren "数据库，事务处理的配置文件")
->>*[cp30.properties](http://blog.csdn.net/guodongxiaren "数据库配置信息")
->>*[log4j.properties](http://blog.csdn.net/guodongxiaren "日志配置文件，")
->>*[log4j2.xml](http://blog.csdn.net/guodongxiaren "日志配置文件，暂时不可以使用")
->>*[oracle.sql](http://blog.csdn.net/guodongxiaren "数据库插入语句，添加数据")
+* [application-context.xml](http://blog.csdn.net/guodongxiaren "spring的主要配置文件，导入其他配置文件")
+* [applicationContext-druid-db.xml](http://blog.csdn.net/guodongxiaren "数据库，事务处理的配置文件")
+* [cp30.properties](http://blog.csdn.net/guodongxiaren "数据库配置信息")
+* [log4j.properties](http://blog.csdn.net/guodongxiaren "日志配置文件，")
+* [log4j2.xml](http://blog.csdn.net/guodongxiaren "日志配置文件，暂时不可以使用")
+* [oracle.sql](http://blog.csdn.net/guodongxiaren "数据库插入语句，添加数据")
 
 
