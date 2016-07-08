@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	    xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+						http://www.springframework.org/schema/tx
+						http://www.springframework.org/schema/tx/spring-tx-4.2.xsd"
+						>
+    <!-- 配置数据源 -->
+    <bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="jdbcUrl" value="${hibernate.jdbcUrl}" />
+        <property name="user" value="${hibernate.user}" />
+        <property name="password" value="${hibernate.password}" />
+        <property name="driverClass" value="${hibernate.driverClass}" />
+        <!--连接池中保留的最大连接数。默认值: 15 -->
+        <property name="maxPoolSize" value="20"/>
+        <!-- 连接池中保留的最小连接数，默认为：3-->
+        <property name="minPoolSize" value="2"/>
+        <!-- 初始化连接池中的连接数，取值应在minPoolSize与maxPoolSize之间，默认为3-->
+        <property name="initialPoolSize" value="2"/>
+
+        <!--最大空闲时间，60秒内未使用则连接被丢弃。若为0则永不丢弃。默认值: 0 -->
+        <property name="maxIdleTime"  value="60"/>
+
+        <!-- 当连接池连接耗尽时，客户端调用getConnection()后等待获取新连接的时间，超时后将抛出SQLException，如设为0则无限期等待。单位毫秒。默认: 0 -->
+        <property name="checkoutTimeout" value="3000"/>
+
+        <!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。默认值: 3 -->
+        <property name="acquireIncrement" value="2"/>
+
+        <!--定义在从数据库获取新连接失败后重复尝试的次数。默认值: 30 ；小于等于0表示无限次-->
+        <property name="acquireRetryAttempts" value="30"/>
+
+        <!--重新尝试的时间间隔，默认为：1000毫秒-->
+        <property name="acquireRetryDelay" value="1000" />
+
+        <!--关闭连接时，是否提交未提交的事务，默认为false，即关闭连接，回滚未提交的事务 -->
+        <property name="autoCommitOnClose" value="false"/>
+
+        <!--c3p0将建一张名为Test的空表，并使用其自带的查询语句进行测试。如果定义了这个参数那么属性preferredTestQuery将被忽略。你不能在这张Test表上进行任何操作，它将只供c3p0测试使用。默认值: null -->
+        <property name="automaticTestTable" value="Test"/>
+
+        <!--如果为false，则获取连接失败将会引起所有等待连接池来获取连接的线程抛出异常，但是数据源仍有效保留，并在下次调用getConnection()的时候继续尝试获取连接。如果设为true，那么在尝试获取连接失败后该数据源将申明已断开并永久关闭。默认: false-->
+        <property name="breakAfterAcquireFailure" value="false"/>
+
+        <!--每60秒检查所有连接池中的空闲连接。默认值: 0，不检查 -->
+        <property name="idleConnectionTestPeriod" value="60"/>
+        <!--c3p0全局的PreparedStatements缓存的大小。如果maxStatements与maxStatementsPerConnection均为0，则缓存不生效，只要有一个不为0，则语句的缓存就能生效。如果默认值: 0-->
+        <property name="maxStatements" value="100"/>
+        <!--maxStatementsPerConnection定义了连接池内单个连接所拥有的最大缓存statements数。默认值: 0 -->
+        <property name="maxStatementsPerConnection" value="1"/>
+    </bean>
+
+    <!-- 配置hibernate session工厂 -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="hibernateProperties">
+            <props>
+                <!-- web项目启动时是否更新表结构 -->
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <!-- 系统使用的数据库方言，也就是使用的数据库类型 -->
+                <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+                <!-- 是否打印Hibernate生成的SQL到控制台 -->
+                <prop key="hibernate.show_sql">true</prop>
+                <!-- 是否格式化打印出来的SQL -->
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
+                <prop key="characterEncoding">utf-8</prop>
+            </props>
+        </property>
+        <!-- 自动扫描注解方式配置的hibernate类文件-->
+        <property name="packagesToScan" value="zhinan.liang.entitys"/>
+    </bean>
+
+    <!-- 配置事务管理器 -->
+    <bean name="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <!--  注解方式配置事物-->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+    <!-- 事务拦截 方式配置事物 -->
+    <!--<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="add*" propagation="REQUIRED" />
+            <tx:method name="append*" propagation="REQUIRED" />
+            <tx:method name="insert*" propagation="REQUIRED" />
+            <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED" />
+            <tx:method name="modify*" propagation="REQUIRED" />
+            <tx:method name="edit*" propagation="REQUIRED" />
+            <tx:method name="delete*" propagation="REQUIRED" />
+            <tx:method name="remove*" propagation="REQUIRED" />
+            <tx:method name="repair" propagation="REQUIRED" />
+            <tx:method name="delAndRepair" propagation="REQUIRED" />
+
+            <tx:method name="get*" propagation="SUPPORTS" />
+            <tx:method name="find*" propagation="SUPPORTS" />
+            <tx:method name="load*" propagation="SUPPORTS" />
+            <tx:method name="search*" propagation="SUPPORTS" />
+            <tx:method name="datagrid*" propagation="SUPPORTS" />
+
+            <tx:method name="*" propagation="SUPPORTS" />
+        </tx:attributes>
+    </tx:advice>
+    <aop:config>
+        <aop:pointcut id="transactionPointcut"
+                      expression="execution(* launch.servers..*Impl.*(..))" />
+        <aop:advisor pointcut-ref="transactionPointcut"
+                     advice-ref="transactionAdvice" />
+    </aop:config>-->
+
+</beans>

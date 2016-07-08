@@ -1,0 +1,52 @@
+Index: ssh_servers/src/main/resources/beans-drools.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ssh_servers/src/main/resources/beans-drools.xml	(revision )
++++ ssh_servers/src/main/resources/beans-drools.xml	(revision )
+@@ -1,17 +1,30 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+-       xmlns:drools="http://drools.org/schema/drools-spring"
+-       xsi:schemaLocation="http://www.springframework.org/schema/beans
+-                            http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+-                            http://drools.org/schema/drools-spring
+-                            http://anonsvn.jboss.org/repos/labs/labs/jbossrules/trunk/drools-container/drools-spring/src/main/resources/org/drools/container/spring/drools-spring-1.0.0.xsd
+-                          ">
+-
+-    <drools:kbase id="kbase1">
+-        <drools:resources>
+-            <drools:resource type="DRL" source="classpath:test/order_1drools.drl"/>
+-        </drools:resources>
+-    </drools:kbase>
+-    <drools:ksession id="kses" type="stateful" kbase="kbase1" name="ke"/>
++       xmlns:kie="http://drools.org/schema/kie-spring"
++       xsi:schemaLocation="
++            http://drools.org/schema/kie-spring
++            https://raw.githubusercontent.com/droolsjbpm/droolsjbpm-integration/master/kie-spring/src/main/resources/org/kie/spring/kie-spring-6.0.0.xsd
++            http://www.springframework.org/schema/beans
++             http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
++            http://drools.org/schema/kie-spring
++             http://drools.org/schema/kie-spring.xs">
++    <!-- 每5分钟扫描是否有新版本文件 -->
++    <kie:import releaseId-ref="ksession-releaseId" enableScanner="true" scannerInterval="300000" />
++    <kie:releaseId id="ksession-releaseId" groupId="com.demo" artifactId="risk" version="REALEASE" />
++    <bean id="kiePostProcessor" class="org.kie.spring.annotations.KModuleAnnotationPostProcessor" />
++    <beans profile="development">
++        <kie:kmodule id="test-kmodule">
++            <kie:kbase name="drl_kiesample" packages="test">
++                <kie:ksession name="ksession1" type="stateful">
++                    <kie:consoleLogger />
++                    <kie:batch>
++                        <kie:insert-object ref="person2" />
++                        <kie:set-global identifier="persons" ref="personsList" />
++                        <kie:fire-all-rules max="10" />
++                    </kie:batch>
++                </kie:ksession>
++            </kie:kbase>
++        </kie:kmodule>
++    </beans>
+ </beans>
+\ No newline at end of file

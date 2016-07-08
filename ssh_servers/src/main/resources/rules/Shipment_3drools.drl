@@ -1,0 +1,59 @@
+package rules;
+dialect  "mvel"
+import zhinan.liang.entitys.Orders;
+import zhinan.liang.utils.DateUtil;
+import zhinan.liang.model.RuleOrder;
+//订单未能创建全量交货单
+rule "Order_shipment"
+activation-group "Order_shipment"
+salience 100
+when
+    RuleOrder(list[2]==true) and $EventHappen:Orders(IsCreateDelivery!=1)
+then
+	 System.out.println("订单未能创建全量交货单-d");
+end
+//订单已创建全量交货单 并且 所有交货单都已生成装运单
+rule "Order_shipment_two"
+activation-group "Order_shipment"
+salience 90
+when
+    RuleOrder(list[2]==true) and $EventHappen:Orders(IsCreateDelivery==1,IsADCSO==1)
+then
+	 System.out.println("订单已创建全量交货单 并且 所有交货单都已生成装运单");
+end
+//订单已创建全量交货单 并且 订单所有交货单未能生成装运单&未超过一般预警时间
+/*
+rule "Order_shipment_three"
+activation-group "Order_shipment"
+salience 80
+when
+    $EventHappen:Orders(IsCreateDelivery==1,IsADCSO!=1,
+    DateUtil.getAfterHour(listDelivery[0].getCreateTime(),24)>= DateUtil.currentDate)
+then
+	 System.out.println("订单已创建全量交货单 并且 订单所有交货单未能生成装运单&未超过一般预警时间");
+end
+
+//4,订单已创建全量交货单 并且 订单未创建全量交货单&超过一般预警时间&未超过严重预警时间
+rule "Order_shipment_four"
+activation-group "Order_shipment"
+salience 70
+when
+    $EventHappen:Orders(IsADCSO!=1,
+    DateUtil.getAfterHour(listDelivery[0].getCreateTime(),24) <= DateUtil.currentDate
+    <= DateUtil.getAfterHour(listDelivery[0].getCreateTime(),48),IsCreateDelivery==1)
+then
+	 System.out.println("订单已创建全量交货单 并且 订单未创建全量交货单&超过一般预警时间&未超过严重预警时间");
+end
+
+
+//5,订单已创建全量交货单 并且 订单未创建全量交货单&超过严重预警时间
+rule "Order_shipment_fire"
+activation-group "Order_shipment"
+salience 70
+when
+    $EventHappen:Orders(IsADCSO!=1,
+    DateUtil.currentDate >= DateUtil.getAfterHour(listDelivery[0].getCreateTime(),
+    48),IsCreateDelivery==1)
+then
+	 System.out.println("订单已创建全量交货单 并且 订单未创建全量交货单&超过严重预警时间");
+end*/

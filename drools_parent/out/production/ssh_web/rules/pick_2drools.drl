@@ -1,0 +1,59 @@
+package rules;
+dialect  "mvel"
+import launch.model.Order;
+import launch.util.DateUtil;
+rule "order_pick"
+activation-group "order_picks"
+salience 100
+//订单未完成发运处理
+when
+    $EventHappen:Order(status == 2)
+then
+	 System.out.println("订单未完成发运处理");
+end
+//2订单完成发运处理&全部装运单的交货单完成发货过账
+rule "order_pick_two"
+activation-group "order_picks"
+salience 70
+when
+    $EventHappen:Order(status < 2 ,IsAlldeliveryToAccount==1)
+then
+	 System.out.println("订单完成发运处理&全部装运单的交货单完成发货过账");
+end
+//3订单完成发运处理&全部装运单的交货单未完成发货过账&未超过一般预警时间
+rule "order_pick_three"
+activation-group "order_picks"
+salience 70
+when
+    $EventHappen:Order(status == 2 ,IsAlldeliveryToAccount != 1,
+    DateUtil.getAfterHour(notFinshAndPioneerCreateShipment.
+    getCreateTime(),24) >= DateUtil.getCurrentDate())
+then
+	 System.out.println("订单完成发运处理&全部装运单的交货单完成发货过账");
+end
+
+//4订单完成发运处理  &  全部装运单的交货单未完成发货过账 &  超过一般预警时间  & 未超过严重预警时间
+rule "order_pick_four"
+activation-group "order_picks"
+salience 70
+when
+    $EventHappen:Order(status == 2 ,IsAlldeliveryToAccount!=1,
+    DateUtil.getAfterHour(notFinshAndPioneerCreateShipment.
+    getCreateTime(),24) <= DateUtil.getCurrentDate() <=
+    DateUtil.getAfterHour(notFinshAndPioneerCreateShipment.
+        getCreateTime(),48))
+then
+	 System.out.println("订单完成发运处理&全部装运单的交货单完成发货过账");
+end
+
+//5订单完成发运处理  &  全部装运单的交货单未完成发货过账 &  超过严重预警时间
+rule "order_pick_fire"
+activation-group "order_picks"
+salience 70
+when
+    $EventHappen:Order(status == 2 ,IsAlldeliveryToAccount!=1,
+     DateUtil.getCurrentDate() >=DateUtil.getAfterHour(
+     notFinshAndPioneerCreateShipment.getCreateTime(),48))
+then
+	 System.out.println("订单完成发运处理  &  全部装运单的交货单未完成发货过账 &  超过严重预警时间");
+end

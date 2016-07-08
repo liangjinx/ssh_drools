@@ -1,0 +1,60 @@
+package rules;
+dialect  "mvel"
+import launch.model.Order;
+import launch.util.DateUtil;
+// 订单未完成物流配送
+rule "order_receipt"
+activation-group "Order_receipt"
+salience 70
+when
+    $EventHappen:Order(status < 4)
+then
+	 System.out.println("订单未完成物流配送");
+end
+
+// 订单完成物流配送 & 订单类型为销售订单 &  全部装运单未完成第一次扫码 & 未超过一般预警时间
+rule "order_receipt_two"
+activation-group "Order_receipt"
+salience 70
+when
+    $EventHappen:Order(status == 4,type==1,IsAllShipmentFinshSignevaluation==1)
+then
+	 System.out.println("订单完成物流配送 & 订单类型为销售订单  &  全部装运单完成签收及评价");
+end
+//订单完成物流配送 & 订单类型为销售订单 &  全部装运单未完成第一次扫码 & 未超过一般预警时间
+rule "order_receipt_three"
+activation-group "Order_receipt"
+salience 70
+when
+    $EventHappen:Order(status == 4,type==1,IsAllShipmentFinshSignevaluation != 1,
+    DateUtil.getAfterHour(notFinshSignevaluationAndPioneerFinshFirstScanningShipment.
+    getFirstScannerTime(),24)>= DateUtil.currentDate)
+then
+	 System.out.println("订单完成物流配送 & 订单类型为销售订单 &  全部装运单未完成第一次扫码 & 未超过一般预警时间 ");
+end
+
+//4订单完成物流配送 & 订单类型为销售订单  &  全部装运单未完成第一次扫码 &  超过一般预警时间  & 未超过严重预警时间
+rule "order_receipt_four"
+activation-group "Order_receipt"
+salience 70
+when
+    $EventHappen:Order(status == 4,type==1,IsAllShipmentFinshSignevaluation != 1,
+    DateUtil.getAfterHour(notFinshSignevaluationAndPioneerFinshFirstScanningShipment.
+    getFirstScannerTime(),24)<= DateUtil.currentDate <=DateUtil.getAfterHour(
+    notFinshSignevaluationAndPioneerFinshFirstScanningShipment.getFirstScannerTime(),48) )
+then
+	 System.out.println("订单完成物流配送 & 订单类型为销售订单  &  全部装运单未完成第一次扫码 &  " +
+	  "超过一般预警时间  & 未超过严重预警时间 ");
+end
+
+//5订单完成物流配送 & 订单类型为销售订单  &  全部装运单未完成第一次扫码 &  超过严重预警时间
+rule "order_receipt_fire"
+activation-group "Order_receipt"
+salience 70
+when
+    $EventHappen:Order(status == 4,type==1,IsAllShipmentFinshSignevaluation != 1,
+    DateUtil.currentDate <=DateUtil.getAfterHour(
+    notFinshSignevaluationAndPioneerFinshFirstScanningShipment.getFirstScannerTime(),48) )
+then
+	 System.out.println("订单完成物流配送 & 订单类型为销售订单 &  全部装运单未完成第一次扫码 & 未超过一般预警时间 ");
+end

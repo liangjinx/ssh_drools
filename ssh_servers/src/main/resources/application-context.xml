@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+    	   http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-4.2.xsd
+           "  default-lazy-init="false">
+    <!--kie 注解注册 -->
+    <context:component-scan base-package="org.kie.spring.annotations"/>
+    <import resource="kie_spring.xml"/>
+    <!-- 引入属性文件,config.properties位于src/main/resources目录下 -->
+    <!--数据库配置导入 -->
+    <import resource="classpath:applicationContext-druid-db.xml" />
+    <!-- 自动扫描dao和service包(自动注入) -->
+    <context:component-scan base-package="zhinan.liang.*" />
+</beans>

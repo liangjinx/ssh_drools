@@ -1,0 +1,60 @@
+package rules;
+dialect  "mvel"
+import launch.model.Order;
+import launch.util.DateUtil;
+
+//订单没有创建 全量交货单 并且未超过一般预警时间
+rule "logistics"
+activation-group "Order_logistics"
+salience 90
+when
+    $EventHappen:Order(status < 3)
+then
+	 System.out.println("订单没有创建 全量交货单 并且未超过一般预警时间");
+end
+//订单完成拣货出库  &  全部装运单完成第一次扫码
+rule "logistics_two"
+activation-group "Order_logistics"
+salience 90
+when
+    $EventHappen:Order(status == 3,IsAllShipmentFinshFirstScanning==1)
+then
+	 System.out.println("订单没有创建 全量交货单 并且未超过一般预警时间");
+end
+
+//订单完成拣货出库  &  全部装运单未完成第一次扫码 & 未超过一般预警时间
+rule "logistics_three"
+activation-group "Order_logistics"
+salience 90
+when
+    $EventHappen:Order(status == 3,IsAllShipmentFinshFirstScanning!=1,
+     DateUtil.getAfterHour(notFinshFirstScanningAndPioneerFinshDeliveryTransferShipment.
+     getIncomingArrivalTime(),24) >= DateUtil.getCurrentDate())
+then
+	 System.out.println("订单完成拣货出库  &  全部装运单未完成第一次扫码 & 未超过一般预警时间 ");
+end
+
+//订单完成拣货出库  &  全部装运单未完成第一次扫码 &  超过一般预警时间  & 未超过严重预警时间
+rule "logistics_four"
+activation-group "Order_logistics"
+salience 90
+when
+    $EventHappen:Order(status == 3,IsAllShipmentFinshFirstScanning!=1,
+     DateUtil.getAfterHour(notFinshFirstScanningAndPioneerFinshDeliveryTransferShipment.
+     getIncomingArrivalTime(),24) <= DateUtil.getCurrentDate() <=DateUtil.getAfterHour(
+     notFinshFirstScanningAndPioneerFinshDeliveryTransferShipment.getIncomingArrivalTime(),24))
+then
+	 System.out.println("订单完成拣货出库  &  全部装运单未完成第一次扫码 & 未超过一般预警时间 ");
+end
+
+//订单完成拣货出库  &  全部装运单未完成第一次扫码 &  超过严重预警时间
+rule "logistics_fire"
+activation-group "Order_logistics"
+salience 90
+when
+    $EventHappen:Order(status == 3,IsAllShipmentFinshFirstScanning!=1,
+     DateUtil.getCurrentDate() >=DateUtil.getAfterHour(
+     notFinshFirstScanningAndPioneerFinshDeliveryTransferShipment.getIncomingArrivalTime(),24))
+then
+	 System.out.println("订单完成拣货出库  &  全部装运单未完成第一次扫码 & 未超过一般预警时间 ");
+end

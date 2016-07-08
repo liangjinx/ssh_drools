@@ -1,0 +1,49 @@
+package rules;
+dialect  "mvel"
+import launch.model.Order;
+import launch.servers.Impl.PublicServiceImpl;
+import launch.util.DateUtil;
+//订单创建了全量交货单
+rule "Order_create_delivery_yes"
+activation-group "Order_create"
+agenda-group "0001"
+auto-focus false
+salience 100
+when
+        $EventHappen:Order(IsCreateDelivery==1)
+then
+        PublicServiceImpl.guizeNext($EventHappen );
+	    System.out.println("订单创建了全量交货单");
+end
+//2，订单没有创建 全量交货单 并且未超过一般预警时间
+/*
+rule "Order_create_delivery_no_and_not_yujing"
+activation-group "Order_create"
+salience 90
+when
+        $EventHappen:Order(IsCreateDelivery!=1,
+        DateUtil.getAfterHour(createTime,24)>=DateUtil.currentDate())
+then
+	 System.out.println("订单没有创建 全量交货单 并且未超过一般预警时间");
+end
+//3，订单未创建全量交货单&超过一般预警时间&未超过严重预警时间
+rule "Order_create_delivery_no_and_not_yanzhong_yujing"
+activation-group "Order_create"
+salience 80
+when
+    $EventHappen:Order(IsCreateDelivery!=1,
+    DateUtil.getAfterHour(createTime,24) <= DateUtil.currentDate()
+    <= DateUtil.getAfterHour(createTime,48))
+then
+	 System.out.println("订单未创建全量交货单&超过一般预警时间&未超过严重预警时间");
+end
+//4，订单未创建全量交货单&超过严重预警时间
+rule "Order_create_delivery_no_and_not_yanzhong_yujing"
+activation-group "Order_create"
+salience 70
+when
+    $EventHappen:Order(IsCreateDelivery!=1,
+    DateUtil.currentDate() >= DateUtil.getAfterHour(createTime,48))
+then
+	 System.out.println("订单未创建全量交货单&超过严重预警时间");
+end*/

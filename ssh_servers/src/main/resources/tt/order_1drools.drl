@@ -1,0 +1,12 @@
+package rules;
+dialect  "mvel"
+import zhinan.liang.entitys.Orders;
+import zhinan.liang.utils.DateUtil;
+import zhinan.liang.servers.Impl.PublicServiceImpl;
+import zhinan.liang.model.RuleOrder;
+
+rule "Order_create_delivery_yes"
+when
+then
+	    System.out.println("sssssssssssssss");
+end

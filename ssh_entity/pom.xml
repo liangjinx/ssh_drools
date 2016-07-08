@@ -1,0 +1,174 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>zhinan.liang</groupId>
+        <artifactId>ssh_drools</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>ssh_drools_entity</artifactId>
+    <packaging>jar</packaging>
+
+    <name>ssh_drools_entity</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <hibernate_jpa_version>1.0.0.Final</hibernate_jpa_version>
+        <c3p0Version>0.9.1.2</c3p0Version>
+        <hibernateVersion>4.2.21.Final</hibernateVersion>
+        <springversion>4.2.4.RELEASE</springversion>
+        <logVersion>2.5</logVersion>
+        <droolsVersion>6.0.0.Beta2</droolsVersion>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.1-api</artifactId>
+            <version>${hibernate_jpa_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>liang.com.oracle</groupId>
+            <artifactId>ojdbc</artifactId>
+            <version>1.0.14</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernateVersion}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jboss-logging</artifactId>
+                    <groupId>org.jboss.logging</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernateVersion}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jboss-logging</artifactId>
+                    <groupId>org.jboss.logging</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${springversion}</version>
+            <type>jar</type>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.storm</groupId>
+            <artifactId>flux-core</artifactId>
+            <optional>true</optional>
+            <version>1.0.1</version>
+        </dependency>
+        <!--log4j2 需要的包 -->
+        <!--<dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>-->
+       <!-- <dependency>
+            &lt;!&ndash;log4j2 web模块&ndash;&gt;
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-web</artifactId>
+            <version>${logVersion}</version>
+            <scope>runtime</scope>
+        </dependency>-->
+       <!-- <dependency>
+            &lt;!&ndash;Java Util到log4j的转换 &ndash;&gt;
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-jul</artifactId>
+            <version>${logVersion}</version>
+        </dependency>-->
+        <!--<dependency>
+            &lt;!&ndash;slf4j 到log4j的转换 &ndash;&gt;
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${logVersion}</version>
+        </dependency>-->
+       <!-- <dependency>
+            &lt;!&ndash;Commons Logging到log4j的转换 &ndash;&gt;
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-jcl</artifactId>
+            <version>${logVersion}</version>
+        </dependency>-->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${logVersion}</version>
+        </dependency>
+        <!--<dependency>
+            &lt;!&ndash;标签&ndash;&gt;
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-taglib</artifactId>
+            <version>${logVersion}</version>
+        </dependency>
+        <dependency>
+            &lt;!&ndash;用NoSQL输出源之一,&ndash;&gt;
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-nosql</artifactId>
+            <version>${logVersion}</version>
+        </dependency>
+        <dependency>
+            &lt;!&ndash;输入输出流&ndash;&gt;
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-iostreams</artifactId>
+            <version>${logVersion}</version>
+        </dependency>
+        <dependency>
+            &lt;!&ndash;Log4j SLF4J适配器&ndash;&gt;
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-to-slf4j</artifactId>
+            <version>${logVersion}</version>
+        </dependency>-->
+        <!--<dependency>
+            &lt;!&ndash;允许应用程序发送事件代理。  &ndash;&gt;
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-flume-ng</artifactId>
+            <version>${logVersion}</version>
+        </dependency>-->
+       <!-- <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${logVersion}</version>
+        </dependency>-->
+        <!--以上是 日志配置-->
+        <!--log4j2 需要的包 -->
+        <dependency>
+            <groupId>javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.8.0.GA</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-c3p0</artifactId>
+            <version>${hibernateVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.2</version>
+            <scope>compile</scope>
+
+        </dependency>
+    </dependencies>
+</project>

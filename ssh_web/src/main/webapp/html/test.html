@@ -1,0 +1,241 @@
+<html>
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<link href="./extendcss/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="extendjs/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="extendjs/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="extendjs/demo/demo.css">
+
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.0.0.js"></script>
+<script type="text/javascript" src="extendjs/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="http://bsdn.org/projects/dorado7/deploy/client-edition/dorado/boot.js"></script>
+<script type="text/javascript">$import("grid,base-widget-desktop")</script>
+<script type="text/javascript">
+    dorado.onInit(function(){
+
+        var dataset=new dorado.widget.DataSet({id:"dataset"});
+        $.ajax({
+            type: 'POST',
+            url: "flow/findAllGuiZe.action" ,
+            data: {} ,
+            success: function(data){
+                console.log(data);
+                dataset.setData(data.rows);
+            },
+            dataType: "JSON"
+
+        });
+
+        view=new dorado.widget.View({
+            renderTo: document.body,
+            children:[{
+                $type:"DataGrid",
+                dataSet:dataset,
+                columns:[{
+                    name:"id",
+                    caption:"id",
+                },{
+                    name:"orderId",
+                    caption:"orderId",
+                },{
+                    name:"type",
+                    caption:"type",
+                },{
+                    name:"createTime",
+                    caption:"createTime",
+                },{
+                    name:"sum",
+                    caption:"sum",
+                },{
+                    name:"unit",
+                    caption:"unit",
+                },{
+                    name:"status",
+                    caption:"status",
+                },{
+                    name:"isCreateDelivery",
+                    caption:"isCreateDelivery",
+                },{
+                    name:"IsASFIAl",
+                    caption:"IsASFIAl",
+                },{
+                    name:"updateTime",
+                    caption:"updateTime",
+                },{
+                    name:"isADCSO",
+                    caption:"isADCSO",
+                },{
+                    name:"isADToA",
+                    caption:"isADToA",
+                },{
+                    name:"isASFFS",
+                    caption:"isASFFS",
+                },{
+                    name:"isASFS",
+                    caption:"isASFS",
+                }]
+            }]
+        });
+
+    });
+</script>
+<body>
+<div style="margin:20px 0;"></div>
+<table id="dg" class="easyui-datagrid" title="后台数据显示" style="width:700px;height:auto"
+       data-options="
+				iconCls: 'icon-edit',
+				singleSelect: true,
+				toolbar: '#tb',
+				url: 'flow/findAll.action',
+				method: 'get',
+				onClickRow: onClickRow
+			">
+    <thead>
+    <tr>
+        <th data-options="field:'id',width:80">id</th>
+        <th data-options="field:'flowName',width:100,editor:'textbox'">Product</th>
+        <th data-options="field:'flowType',width:80,align:'right',editor:{type:'numberbox'}">flowType</th>
+        <th data-options="field:'parentFlow',width:80,align:'right',editor:'textbox'">parentFlow</th>
+        <th data-options="field:'childFlow',width:250,editor:'textbox'">childFlow</th>
+        <th data-options="field:'status',width:60,align:'center',editor:{type:'checkbox',options:{on:'1',off:'0'}}">Status</th>
+    </tr>
+    </thead>
+</table>
+<div id="tb" style="height:auto">
+    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="append()">Append</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="save()">save</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="removeit()">Remove</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="accept()">Accept</a>
+</div>
+<div>
+    <div id="checkout_value">
+        订单状态规则(状态为0的不输出)：<input type="checkbox" name="b" value=0 />
+        订单单位规则(小于2的不输出)：<input type="checkbox" name="b" value=0 />
+        订单总量规则(总量小于20的不输出):<input type="checkbox" name="b" value=0 />
+        <input type="button" value="查询" name="查询" class="btn1"/>
+    </div>
+    <table>
+        <thead>
+        <th>id</th><th>orderId</th><th>type</th><th>createTime</th>
+        <th>sum</th><th>unit</th><th>status</th><th>updateTime</th>
+        <th>IsCreateDelivery</th><th>IsADCSO</th><th>IsADToA</th>
+        <th>IsASFFS</th><th>IsASFS</th><th>IsASFIAl</th>
+        </thead>
+        <tbody class="guizebody">
+        <tr>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+<script type="text/javascript">
+    var editIndex = undefined;
+    var issave=false;
+    function endEditing(){
+        if (editIndex == undefined){return true}
+        if ($('#dg').datagrid('validateRow', editIndex)){
+            var ed = $('#dg').datagrid('getEditor', {index:editIndex,field:'id'});
+            $('#dg').datagrid('endEdit', editIndex);
+            var rows =$('#dg').datagrid("getSelected");
+            $.ajax({url:"flow/save.action",async:false,data:{flowName:rows.flowName,
+                parentFlow:rows.parentFlow, childFlow:rows.childFlow,flowType:rows.flowType,
+                status:rows.status}});
+            editIndex = undefined;
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function onClickRow(index){
+        if (editIndex != index){
+            if (endEditing()){
+                $('#dg').datagrid('selectRow', index)
+                        .datagrid('beginEdit', index);
+                editIndex = index;
+            } else {
+                $('#dg').datagrid('selectRow', editIndex);
+            }
+        }
+    }
+    function append(){
+        if (endEditing()){
+            $('#dg').datagrid('appendRow',{status:'P'});
+            editIndex = $('#dg').datagrid('getRows').length-1;
+            $('#dg').datagrid('selectRow', editIndex)
+                    .datagrid('beginEdit', editIndex);
+            issave=true;
+        }
+    }
+    function removeit(){
+        var rows =$('#dg').datagrid("getSelected");
+        if (editIndex == undefined){return}
+        $('#dg').datagrid('cancelEdit', editIndex)
+                .datagrid('deleteRow', editIndex);
+        $.ajax({url:"flow/delete.action",async:false,data:{id:rows.id}});
+        editIndex = undefined;
+    }
+    function accept(){
+        if (endEditing()){
+            $('#dg').datagrid('acceptChanges');
+        }
+    }
+    function reject(){
+        $('#dg').datagrid('rejectChanges');
+        editIndex = undefined;
+    }
+    function getChanges(){
+        var rows = $('#dg').datagrid('getChanges');
+        alert(rows.length+' rows are changed!');
+    }
+</script>
+<script>
+    $("input[type='checkbox']").click(function () {
+        if(this.value==0){
+            this.value=1;
+        }else{
+            this.value=0;
+        }
+    });
+    $(".btn1").click(function(){
+        var boolValues=null;
+        var values=$("#checkout_value").find("input[type='checkbox']");
+        for (var i=0;i<values.length;i++){
+            if(values[i]==null || values[i].value==0){
+                if (boolValues==null){
+                    boolValues ='false';
+                }else{
+                    boolValues = boolValues + ',false';
+                }
+
+            }else{
+                if (boolValues==null){
+                    boolValues ='true';
+                }else{
+                    boolValues = boolValues + ',true';
+                }
+
+            }
+        }
+        if(values.length<6){
+            for (var i=values.length;i<6;i++){
+                boolValues = boolValues + ',false';
+            }
+        }
+        $.ajax({url:"flow/findAllGuiZe.action",
+            data:{"boolValues":boolValues},async:false,type:"POST",dataType:'json',
+            success:function (data) {
+                var datalist=data.rows;
+                datalist.forEach(function (e) {
+                    $('.guizebody').html('<tr><td>'+e.id+'</td><td>'
+                            +e.orderId+'</td><td>'
+                            +e.type+'</td><td>'+e.createTime+'</td><td>'
+                            +e.sum+'</td><td>'+e.unit+'</td><td>'
+                            +e.status+'</td><td>'+e.updateTime+'</td><td>'
+                            +e.isCreateDelivery+'</td><td>'+e.isADCSO+'</td><td>'
+                            +e.isADToA+'</td><td>'+e.isASFFS+'</td><td>'
+                            +e.isASFS+'</td><td>'+e.isASFIAl+'</td></tr>');
+                });
+            }});
+    });
+</script>

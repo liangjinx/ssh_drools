@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+              http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+<!-- name="持久化单元命名"  transaction-type="本地事务/JTA" -->
+<persistence-unit name="names" transaction-type="RESOURCE_LOCAL">
+    <!-- 供应商 -->
+  <!--  <provider>org.hibernate.ejb.HibernatePersistence</provider>-->
+    <properties>
+        <!-- 参数：数据库驱动名、地址、用户、密码、方言、显示执行SQL语句 -->
+        <property name="hibernate.connection.driver_class" value="oracle.jdbc.odbc.JdbcOdbcDriver"/>
+        <property name="hibernate.connection.url" value="jdbc:oracle:thin:@localhost:1521:orcl"/>
+        <property name="hibernate.connection.username" value="scott"/>
+        <property name="hibernate.connection.password" value="scott"/>
+        <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
+        <property name="hibernate.show_sql" value="true"/>
+        <!-- 其他设置 -->
+        <property name="minPoolSize" value="5"/>
+        <property name="initialPoolSize" value="10"/>
+        <property name="idleConnectionTestPeriod" value="120"/>
+        <property name="acquireIncrement" value="10"/>
+        <property name="checkoutTimeout" value="3600"/>
+        <property name="numHelperThreads" value="4"/>
+        <property name="maxStatements" value="400"/>
+        <property name="maxStatementsPerConnection" value="20"/>
+        <property name="maxIdleTime" value="180"/>
+        <property name="acquireRetryAttempts" value="30"/>
+        <property name="maxPoolSize" value="200"/>
+    </properties>
+</persistence-unit>
+</persistence>

@@ -1,0 +1,57 @@
+package rules;
+dialect  "mvel"
+import zhinan.liang.entitys.Orders;
+import zhinan.liang.utils.DateUtil;
+import zhinan.liang.model.RuleOrder;
+//6订单完成物流配送 & 订单类型为采购订单  &  全部装运单完成签收及评价
+rule "Order_wuliupeison"
+activation-group "Order_wuliupeison"
+salience 70
+when
+    RuleOrder(list[5]==true) and $EventHappen:Orders(status == 4,type==2,IsASFS == 1)
+
+then
+	 System.out.println("订单完成物流配送 & 订单类型为采购订单  &  全部装运单完成签收及评价 ");
+end
+
+//7订单完成物流配送 & 订单类型为采购订单 &  全部装运单未完成第一次扫码 & 未超过一般预警时间
+/*
+rule "Order_wuliupeison_two"
+activation-group "Order_wuliupeison"
+salience 70
+when
+    $EventHappen:Orders(status == 4,type==2,IsASFS != 1,
+    DateUtil.getAfterHour( notFinshIncomingArrivalAndPioneerFinshFirstScanningShipment.
+    getFirstScannerTime(),24)>= DateUtil.currentDate)
+
+then
+	 System.out.println("订单完成物流配送 & 订单类型为采购订单 &  全部装运单未完成第一次扫码 & 未超过一般预警时间  ");
+end
+
+
+//8订单完成物流配送 & 订单类型为采购订单 &  全部装运单未完成第一次扫码 & 未超过一般预警时间
+rule "Order_wuliupeison_three"
+activation-group "Order_wuliupeison"
+salience 70
+when
+    $EventHappen:Orders(status == 4,type==2,IsASFS != 1,
+    DateUtil.getAfterHour( notFinshIncomingArrivalAndPioneerFinshFirstScanningShipment.
+    getFirstScannerTime(),24) <= DateUtil.currentDate <= DateUtil.getAfterHour(
+    notFinshIncomingArrivalAndPioneerFinshFirstScanningShipment.getFirstScannerTime(),48))
+
+then
+	 System.out.println("订单完成物流配送 & 订单类型为采购订单 &  全部装运单未完成第一次扫码 & 未超过一般预警时间  ");
+end
+
+//9订单完成物流配送 & 订单类型为采购订单  &  全部装运单未完成第一次扫码 &  超过一般预警时间  & 未超过严重预警时间
+rule "Order_wuliupeison_four"
+activation-group "Order_wuliupeison"
+salience 70
+when
+    $EventHappen:Orders(status == 4,type==2,IsASFS != 1,
+     DateUtil.currentDate <= DateUtil.getAfterHour(
+    notFinshIncomingArrivalAndPioneerFinshFirstScanningShipment.getFirstScannerTime(),48))
+
+then
+	 System.out.println("订单完成物流配送 & 订单类型为采购订单 &  全部装运单未完成第一次扫码 & 未超过一般预警时间  ");
+end*/

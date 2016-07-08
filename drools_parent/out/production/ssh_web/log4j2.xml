@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="error" monitorInterval="1800">
+    <appenders>
+        <!--定义日志输出的格式和输出地址 -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <RollingFile name="RollingFile" filename="classpath:automation.log"
+                     filepattern="${logPath}/%d{YYYYMMddHHmmss}-automation.log">
+            <PatternLayout pattern="%d{YYYY-MM-dd HH:mm:ss} [%t] %-5p %c{1}:%L - %msg%n" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+    </appenders>
+    <loggers>
+        <!--定义日志输出级别和使用的输出地址 -->
+        <Logger name="launch.daos.Impl.StudentDaoImpl" level="error" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <root level="info" additivity="false">
+        <appender-ref ref="Console"/>
+    </root>
+    </loggers>
+</configuration>
+

@@ -1,0 +1,19 @@
+package rules;
+dialect  "mvel"
+import zhinan.liang.entitys.Student;
+import zhinan.liang.entitys.Orders;
+import zhinan.liang.model.RuleOrder;
+import java.util.List;
+global RuleOrder $ruleOrder;
+rule testStudent
+when $student:Student(age>20)
+then
+    $student.setName("历史");
+    update($student);
+end
+query testQuery
+    ruleOrder0: Orders(IsCreateDelivery==1) and RuleOrder(list[0]==true)
+end
+query testQueryP(int indexvalue,boolean b)
+    ruleOrder1 : Orders(IsCreateDelivery==1) and RuleOrder(list[1]==b)
+end

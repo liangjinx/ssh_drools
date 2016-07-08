@@ -1,0 +1,36 @@
+package rules;
+dialect  "mvel"
+import zhinan.liang.entitys.Orders;
+import zhinan.liang.utils.DateUtil;
+import zhinan.liang.servers.Impl.PublicServiceImpl;
+import zhinan.liang.model.RuleOrder;
+
+rule "Order_create_delivery_yes"
+activation-group "Order_create"
+salience 100
+when
+        RuleOrder(list[0]==true) and $EventHappen:Orders(IsCreateDelivery == 1)
+then
+        PublicServiceImpl.guizeNext($EventHappen );
+	    System.out.println("sssssssssssssss");
+end
+
+rule "Order_create_delivery_no_and_not_yujing"
+activation-group "Order_create"
+salience 90
+when
+        RuleOrder(list[1]==true) and $EventHappen:Orders(IsADCSO==1)
+then
+       PublicServiceImpl.guizeNext($EventHappen );
+	   System.out.println("bbbbbbbbbbbbbbbbbb");
+end
+
+rule "Order_create_delivery_no_and_not_yanzhong_yujing"
+activation-group "Order_create"
+salience 80
+when
+    RuleOrder(list[2]==true) and $EventHappen:Orders(status == 1)
+then
+      PublicServiceImpl.guizeNext($EventHappen );
+	 System.out.println("cccccccccccccccccccccccc");
+end
