@@ -54,4 +54,24 @@
 
 >> [META-INFsss](http://blog.csdn.net/guodongxiaren "drools不和spring组合使用的时候测试使用")
 
->> rules,test,tt  都是
+>> rules,test,tt  都是规则文件的测试使用
+
+
+#### web
+> zhinan.liang
+>> action
+* [FlowAction](http://blog.csdn.net/guodongxiaren "主要做测试的，与前端界面交互")
+* [PublicAction](http://blog.csdn.net/guodongxiaren "用于struts的传参，接收参数，")
+>> model
+* [GuizeModel](http://blog.csdn.net/guodongxiaren "测试的时候使用的，用于传递对象")
+
+>resources
+* [struts.xml](http://blog.csdn.net/guodongxiaren "struts的主要配置文件，返回值，请求格式")
+
+>webapp
+>> [extendcss](http://blog.csdn.net/guodongxiaren "前端框架使用的cdd")
+>> [extendjs](http://blog.csdn.net/guodongxiaren "前端框架使用的js")
+>> [html](http://blog.csdn.net/guodongxiaren "测试使用，d原本打算使用html做前端")
+>> [jsp](http://blog.csdn.net/guodongxiaren "所有的业务jsp界面，")
+>> [web-inf](http://blog.csdn.net/guodongxiaren "web.xml")
+
