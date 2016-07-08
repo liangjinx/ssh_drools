@@ -64,10 +64,10 @@
 * [FlowAction](http://blog.csdn.net/guodongxiaren "主要做测试的，与前端界面交互")
 * [PublicAction](http://blog.csdn.net/guodongxiaren "用于struts的传参，接收参数，")
 
->> model
+>>  model
 * [GuizeModel](http://blog.csdn.net/guodongxiaren "测试的时候使用的，用于传递对象")
 
->resources
+> resources
 * [struts.xml](http://blog.csdn.net/guodongxiaren "struts的主要配置文件，返回值，请求格式")
 
 > webapp
