@@ -34,16 +34,16 @@
 #### server
 > zhinan.liang
 >> interceptorS
-* [Myinterceptor](http://blog.csdn.net/guodongxiaren "实现自定义执行方法的拦截器")
+* [Myinterceptor](http://blog.csdn.net/guodongxiaren "实现自定义执行方法的拦截器,记录方法执行的时间")
 
->> [model](http://blog.csdn.net/guodongxiaren "自定义与drools规则文件交互的对象")
+>> model
 * [ MyKnowledgeBase](http://blog.csdn.net/guodongxiaren "drools实现注解需要的")
 
 >> utils
-*  [DateUtil](http://blog.csdn.net/guodongxiaren "日期操作的实现类 ")
+* [DateUtil](http://blog.csdn.net/guodongxiaren "日期操作的实现类 ")
 
 >> servers
-[publicService](http://blog.csdn.net/guodongxiaren "service 层的公共方法集 ")
+* [publicService](http://blog.csdn.net/guodongxiaren "service 层的公共方法集 ")
     
 >>> impl
 * [PublicServiceImpl](http://blog.csdn.net/guodongxiaren "drools 操作后的出口点数据")
