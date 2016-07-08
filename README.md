@@ -53,4 +53,5 @@
 * [kie_spring.xml](http://blog.csdn.net/guodongxiaren "kie方式配置drools 的spring配置文件")
 
 >> [META-INFsss](http://blog.csdn.net/guodongxiaren "drools不和spring组合使用的时候测试使用")
+
 >> rules,test,tt  都是
