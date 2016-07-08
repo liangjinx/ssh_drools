@@ -18,8 +18,7 @@
     [publicDao](http://blog.csdn.net/guodongxiaren "do的公共方法")
 >>> impl
 * [publicDaoImpl](http://blog.csdn.net/guodongxiaren "dao的公共方法的实现")
-* [MyHibernateDaoSupport](http://blog.csdn.net/guodongxiaren "dao公共方法实现所需要的，为了实现注解")
-
+* [MyHibernateDaoSupport](http://blog.csdn.net/guodongxiaren "dao公共方法实现所需要的，为了实现注解"
 >> entitys
 
 > resources
@@ -33,7 +32,5 @@
 #### server
 > zhinan.liang
 >> interceptorS
-    >>>   ff
+>>>   ff
 >> test
-
-
