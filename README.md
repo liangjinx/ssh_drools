@@ -72,9 +72,13 @@
 * [struts.xml](http://blog.csdn.net/guodongxiaren "struts的主要配置文件，返回值，请求格式")
 
 > webapp
->>[extendcss](http://blog.csdn.net/guodongxiaren "前端框架使用的cdd")\<br>
->>[extendjs](http://blog.csdn.net/guodongxiaren "前端框架使用的js")\<br>
->>[html](http://blog.csdn.net/guodongxiaren "测试使用，d原本打算使用html做前端")\<br>
->>[jsp](http://blog.csdn.net/guodongxiaren "所有的业务jsp界面，")\<br>
->>[web-inf](http://blog.csdn.net/guodongxiaren "web.xml")
+>> [extendcss](http://blog.csdn.net/guodongxiaren "前端框架使用的cdd")
+
+>> [extendjs](http://blog.csdn.net/guodongxiaren "前端框架使用的js")
+
+>> [html](http://blog.csdn.net/guodongxiaren "测试使用，d原本打算使用html做前端")
+
+>> [jsp](http://blog.csdn.net/guodongxiaren "所有的业务jsp界面，")
+
+>> [web-inf](http://blog.csdn.net/guodongxiaren "web.xml")
 
