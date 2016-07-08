@@ -39,7 +39,7 @@
 >> [model](http://blog.csdn.net/guodongxiaren "自定义与drools规则文件交互的对象")
 * [ MyKnowledgeBase](http://blog.csdn.net/guodongxiaren "drools实现注解需要的")
 
->>   utils
+>> utils
 *  [DateUtil](http://blog.csdn.net/guodongxiaren "日期操作的实现类 ")
 
 >> servers
