@@ -51,5 +51,6 @@
 * [application-context.xml](http://blog.csdn.net/guodongxiaren "spring的主要配置文件,这里主要是导入drools的spring配置文件")
 * [drools_spring.xml](http://blog.csdn.net/guodongxiaren "drools 的spring配置文件，目前没有使用")
 * [kie_spring.xml](http://blog.csdn.net/guodongxiaren "kie方式配置drools 的spring配置文件")
+
 >> [META-INFsss](http://blog.csdn.net/guodongxiaren "drools不和spring组合使用的时候测试使用")
 >> rules,test,tt  都是
