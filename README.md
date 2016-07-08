@@ -34,20 +34,6 @@
 > zhinan.liang
 >> interceptorS
 >>>   ff
->>   test
->>  my
->>>   MyKnowledgeBase drools实现注解需要的
->>   utils
->>>    DateUtil   日期操作的实现类
->> servers
- publicService   service 层的公共方法集
->>> impl
-PublicServiceImpl  drools 操作后的出口点数据
-> resources
-* [application-context.xml](http://blog.csdn.net/guodongxiaren "spring的主要配置文件,这里主要是导入drools的spring配置文件")
-* [drools_spring.xml](http://blog.csdn.net/guodongxiaren "drools 的spring配置文件，目前没有使用")
-* [kie_spring.xml](http://blog.csdn.net/guodongxiaren "kie方式配置drools 的spring配置文件")
->> META-INFsss drools不和spring组合使用的时候测试使用
->> rules,test,tt  都
+
 
 
