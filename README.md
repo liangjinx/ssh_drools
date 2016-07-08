@@ -33,6 +33,14 @@
 #### server
 > zhinan.liang
 >> interceptorS
->>>   ff
+>>> [Myinterceptor](http://blog.csdn.net/guodongxiaren "实现自定义执行方法的拦截器")
 
->> test
+>> [model](http://blog.csdn.net/guodongxiaren "自定义与drools规则文件交互的对象")
+>>>   MyKnowledgeBase drools实现注解需要的
+
+>>   utils
+>>>    DateUtil   日期操作的实现类
+
+>> servers
+ publicService   service 层的公共方法集
+
