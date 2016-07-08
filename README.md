@@ -1,5 +1,5 @@
 # ssh_drools
-==志蓝做的ssh+drools框架
+##志蓝做的ssh+drools框架
 
 -----项目分三层，serves，entitys，web。
  # entitys层使用hibernate的jpa做数据处理，在这层使用spring框架管理对象，引入配置文件，使用日志d等，第一次提交没有做drools和jpa结合使用。
