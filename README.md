@@ -33,7 +33,7 @@
 #### server
 > zhinan.liang
 >> interceptorS
->>> [Myinterceptor](http://blog.csdn.net/guodongxiaren "实现自定义执行方法的拦截器")
+>>> ff
 >> test
 >> my
 >>> MyKnowledgeBase drools实现注解需要的
