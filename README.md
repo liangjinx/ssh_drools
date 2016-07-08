@@ -19,6 +19,7 @@
 >>>impl
 * [publicDaoImpl](http://blog.csdn.net/guodongxiaren "dao的公共方法的实现")
 * [MyHibernateDaoSupport](http://blog.csdn.net/guodongxiaren "dao公共方法实现所需要的，为了实现注解")
+
 >>entitys
 >resources
 >>[application-context.xml](http://blog.csdn.net/guodongxiaren "spring的主要配置文件，导入其他配置文件")
